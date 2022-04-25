@@ -7,8 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 class WebtechApplicationTests {
 
 	@Test
-	void contextLoads() {
-		throw new RuntimeException(("only for test"));
-	}
+	void contextLoads(){}
 
 }
