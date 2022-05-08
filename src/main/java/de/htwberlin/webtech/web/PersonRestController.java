@@ -19,7 +19,6 @@ public class PersonRestController {
         persons.add(new Person(2,"Jason","Derulo",true));
     }
 
-
     @GetMapping(path = "/api/v1/persons")
     public ResponseEntity<List<Person>> fetchPersons(){
         return ResponseEntity.ok(persons);
