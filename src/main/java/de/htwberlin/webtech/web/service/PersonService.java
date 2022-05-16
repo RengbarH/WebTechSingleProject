@@ -30,9 +30,7 @@ public class PersonService {
     public Person findById(Long id) {
         var personEntity = personRepository.findById(id);
         return personEntity.map(this::transformEntity).orElse(null);
-
     }
-
 
     public Person create(PersonManipulationRequest request) {
         var personEntity = new PersonEntity(request.getFirstName(), request.getLastName(), request.isVaccinated());
@@ -52,7 +50,14 @@ public class PersonService {
         personEntity = personRepository.save(personEntity);
 
         return transformEntity(personEntity);
+    }
 
+    public boolean deleteById(Long id) {
+        if (!personRepository.existsById(id)) {
+            return false;
+        }
+        personRepository.deleteById(id);
+        return true;
     }
 
     private Person transformEntity(PersonEntity personEntity) {
