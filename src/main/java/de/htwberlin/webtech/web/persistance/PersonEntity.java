@@ -33,7 +33,6 @@ public class PersonEntity {
         return id;
     }
 
-
     public String getFirstName() {
         return firstName;
     }
