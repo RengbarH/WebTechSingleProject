@@ -24,11 +24,20 @@ public class PersonRestController {
         return ResponseEntity.ok(personService.findAll());
     }
 
+    @GetMapping(path = "/api/v1/persons/{id}")
+    public ResponseEntity<Person> fetchPersonById(@PathVariable Long id){
+        var person = personService.findById(id);
+        return person != null?ResponseEntity.ok(person):ResponseEntity.notFound().build();
+    }
+
     @PostMapping(path = "/api/v1/persons")
     public ResponseEntity<Void> createPerson(@RequestBody PersonCreateRequest request) throws URISyntaxException {
         var person = personService.create(request);
         URI uri = new URI("/api/v1/persons/" + person.getId());
         return ResponseEntity.created(uri).build();
     }
+
+
+
 
 }
