@@ -2,7 +2,7 @@ package de.htwberlin.webtech.web.service;
 
 
 import de.htwberlin.webtech.web.api.Person;
-import de.htwberlin.webtech.web.api.PersonCreateRequest;
+import de.htwberlin.webtech.web.api.PersonManipulationRequest;
 import de.htwberlin.webtech.web.persistance.PersonEntity;
 import de.htwberlin.webtech.web.persistance.PersonRepository;
 import org.springframework.stereotype.Service;
@@ -20,29 +20,42 @@ public class PersonService {
     }
 
 
-
-    public List<Person> findAll(){
+    public List<Person> findAll() {
         List<PersonEntity> persons = personRepository.findAll();
         return persons.stream()
                 .map(this::transformEntity)
                 .collect(Collectors.toList());
     }
 
-    public Person findById(Long id){
+    public Person findById(Long id) {
         var personEntity = personRepository.findById(id);
         return personEntity.map(this::transformEntity).orElse(null);
 
     }
 
 
-    public Person create(PersonCreateRequest request){
+    public Person create(PersonManipulationRequest request) {
         var personEntity = new PersonEntity(request.getFirstName(), request.getLastName(), request.isVaccinated());
         personEntity = personRepository.save(personEntity);
         return transformEntity(personEntity);
     }
 
+    public Person update(Long id, PersonManipulationRequest request) {
+        var personEntityOptional = personRepository.findById(id);
+        if (personEntityOptional.isEmpty()) {
+            return null;
+        }
+        var personEntity = personEntityOptional.get();
+        personEntity.setFirstName(request.getFirstName());
+        personEntity.setLastName((request.getLastName()));
+        personEntity.setVaccinated(request.isVaccinated());
+        personEntity = personRepository.save(personEntity);
 
-    private Person transformEntity(PersonEntity personEntity){
+        return transformEntity(personEntity);
+
+    }
+
+    private Person transformEntity(PersonEntity personEntity) {
         return new Person(
                 personEntity.getId(),
                 personEntity.getFirstName(),
