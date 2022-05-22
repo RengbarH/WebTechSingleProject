@@ -19,13 +19,18 @@ public class RecipeEntity {
     @Column(name = "complexity")
     private Complexity complexity;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private PersonEntity owner;
+
     public RecipeEntity() {
     }
 
-    public RecipeEntity(String recipeTitle, String subtitle, Complexity complexity) {
+    public RecipeEntity(String recipeTitle, String subtitle, Complexity complexity, PersonEntity owner) {
         this.recipeTitle = recipeTitle;
         this.subtitle = subtitle;
         this.complexity = complexity;
+        this.owner = owner;
     }
 
     public Long getId() {
@@ -54,5 +59,13 @@ public class RecipeEntity {
 
     public void setComplexity(Complexity complexity) {
         this.complexity = complexity;
+    }
+
+    public PersonEntity getOwner() {
+        return owner;
+    }
+
+    public void setOwner(PersonEntity owner) {
+        this.owner = owner;
     }
 }

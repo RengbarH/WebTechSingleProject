@@ -6,6 +6,7 @@ import de.htwberlin.webtech.web.api.PersonManipulationRequest;
 import de.htwberlin.webtech.web.persistance.Gender;
 import de.htwberlin.webtech.web.persistance.PersonEntity;
 import de.htwberlin.webtech.web.persistance.PersonRepository;
+import de.htwberlin.webtech.web.persistance.RecipeEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -67,12 +68,14 @@ public class PersonService {
 
     private Person transformEntity(PersonEntity personEntity) {
         var gender = personEntity.getGender() != null ? personEntity.getGender().name() : Gender.UNKNOWN.name();
+        var recipeId = personEntity.getRecipe().stream().map(RecipeEntity::getId).collect(Collectors.toList());
         return new Person(
                 personEntity.getId(),
                 personEntity.getFirstName(),
                 personEntity.getLastName(),
                 gender,
-                personEntity.getIdentifier()
+                personEntity.getIdentifier(),
+                recipeId
         );
     }
 }

@@ -6,12 +6,14 @@ public class Recipe {
     private String recipeTitle;
     private String subtitle;
     private String complexity;
+    private Long ownerId;
 
-    public Recipe(Long id, String recipeTitle, String subtitle, String complexity) {
+    public Recipe(Long id, String recipeTitle, String subtitle, String complexity, Long ownerId) {
         this.id = id;
         this.recipeTitle = recipeTitle;
         this.subtitle = subtitle;
         this.complexity = complexity;
+        this.ownerId = ownerId;
     }
 
     public Long getId() {
@@ -44,5 +46,13 @@ public class Recipe {
 
     public void setComplexity(String complexity) {
         this.complexity = complexity;
+    }
+
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 }

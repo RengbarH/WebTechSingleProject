@@ -5,11 +5,13 @@ public class RecipeManipulationRequest {
     private String recipeTitle;
     private String subtitle;
     private String complexity;
+    private Long ownerId;
 
-    public RecipeManipulationRequest(String recipeTitle, String subtitle, String complexity) {
+    public RecipeManipulationRequest(String recipeTitle, String subtitle, String complexity, Long ownerId) {
         this.recipeTitle = recipeTitle;
         this.subtitle = subtitle;
         this.complexity = complexity;
+        this.ownerId = ownerId;
     }
 
     public String getRecipeTitle() {
@@ -34,5 +36,13 @@ public class RecipeManipulationRequest {
 
     public void setComplexity(String complexity) {
         this.complexity = complexity;
+    }
+
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 }

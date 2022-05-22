@@ -1,6 +1,8 @@
 package de.htwberlin.webtech.web.persistance;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "persons")
 public class PersonEntity {
@@ -22,6 +24,9 @@ public class PersonEntity {
 
     @Column(name = "identifier", nullable = false)
     private String identifier;
+
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
+    private List<RecipeEntity> recipe = new ArrayList<>();
 
 
     public PersonEntity(String firstName, String lastName, Gender gender, String identifier) {
@@ -68,5 +73,13 @@ public class PersonEntity {
 
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
+    }
+
+    public List<RecipeEntity> getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(List<RecipeEntity> recipe) {
+        this.recipe = recipe;
     }
 }

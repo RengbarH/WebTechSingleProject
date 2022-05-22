@@ -3,6 +3,7 @@ package de.htwberlin.webtech.web.service;
 import de.htwberlin.webtech.web.api.Recipe;
 import de.htwberlin.webtech.web.api.RecipeManipulationRequest;
 import de.htwberlin.webtech.web.persistance.Complexity;
+import de.htwberlin.webtech.web.persistance.PersonRepository;
 import de.htwberlin.webtech.web.persistance.RecipeEntity;
 import de.htwberlin.webtech.web.persistance.RecipeRepository;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,12 @@ import java.util.stream.Collectors;
 public class RecipeService {
 
     private final RecipeRepository recipeRepository;
+    private final PersonRepository personRepository;
 
 
-    public RecipeService(RecipeRepository recipeRepository) {
+    public RecipeService(RecipeRepository recipeRepository, PersonRepository personRepository) {
         this.recipeRepository = recipeRepository;
+        this.personRepository = personRepository;
     }
 
     public List<Recipe> findAll() {
@@ -34,8 +37,9 @@ public class RecipeService {
 
     public Recipe create(RecipeManipulationRequest request) {
         var complexity = Complexity.valueOf(request.getComplexity());
+        var owner = personRepository.findById(request.getOwnerId()).orElseThrow();
 
-        var recipeEntity = new RecipeEntity(request.getRecipeTitle(), request.getSubtitle(), complexity);
+        var recipeEntity = new RecipeEntity(request.getRecipeTitle(), request.getSubtitle(), complexity, owner);
         recipeEntity = recipeRepository.save(recipeEntity);
 
         return transformEntity(recipeEntity);
@@ -69,7 +73,8 @@ public class RecipeService {
                 recipeEntity.getId(),
                 recipeEntity.getRecipeTitle(),
                 recipeEntity.getSubtitle(),
-                complexity
+                complexity,
+                recipeEntity.getOwner().getId()
         );
     }
 }

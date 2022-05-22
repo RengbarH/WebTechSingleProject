@@ -1,5 +1,7 @@
 package de.htwberlin.webtech.web.api;
 
+import java.util.List;
+
 public class Person {
 
     private long id;
@@ -7,13 +9,15 @@ public class Person {
     private String lastName;
     private String gender;
     private String identifier;
+    private List<Long> recipeId;
 
-    public Person(long id, String firstName, String lastName, String gender, String identifier) {
+    public Person(long id, String firstName, String lastName, String gender, String identifier, List<Long> recipeId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.identifier = identifier;
+        this.recipeId = recipeId;
     }
 
     public long getId() {
@@ -54,5 +58,13 @@ public class Person {
 
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
+    }
+
+    public List<Long> getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(List<Long> recipeId) {
+        this.recipeId = recipeId;
     }
 }
