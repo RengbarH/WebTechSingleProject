@@ -16,9 +16,19 @@ public class PersonEntity {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    public PersonEntity(String firstName, String lastName) {
+    @Column(name = "gender")
+    @Enumerated(value = EnumType.STRING)
+    private Gender gender;
+
+    @Column(name = "identifier", nullable = false)
+    private String identifier;
+
+
+    public PersonEntity(String firstName, String lastName, Gender gender, String identifier) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.gender = gender;
+        this.identifier = identifier;
     }
 
     protected PersonEntity() {
@@ -42,5 +52,21 @@ public class PersonEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 }
