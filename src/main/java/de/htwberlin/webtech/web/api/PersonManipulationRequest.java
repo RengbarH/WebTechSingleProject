@@ -4,12 +4,10 @@ public class PersonManipulationRequest {
 
     private String firstName;
     private String lastName;
-    private boolean vaccinated;
 
-    public PersonManipulationRequest(String firstName, String lastName, boolean vaccinated) {
+    public PersonManipulationRequest(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.vaccinated = vaccinated;
     }
 
     public String getFirstName() {
@@ -26,13 +24,5 @@ public class PersonManipulationRequest {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public boolean isVaccinated() {
-        return vaccinated;
-    }
-
-    public void setVaccinated(boolean vaccinated) {
-        this.vaccinated = vaccinated;
     }
 }

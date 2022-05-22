@@ -33,7 +33,7 @@ public class PersonService {
     }
 
     public Person create(PersonManipulationRequest request) {
-        var personEntity = new PersonEntity(request.getFirstName(), request.getLastName(), request.isVaccinated());
+        var personEntity = new PersonEntity(request.getFirstName(), request.getLastName());
         personEntity = personRepository.save(personEntity);
         return transformEntity(personEntity);
     }
@@ -46,7 +46,6 @@ public class PersonService {
         var personEntity = personEntityOptional.get();
         personEntity.setFirstName(request.getFirstName());
         personEntity.setLastName((request.getLastName()));
-        personEntity.setVaccinated(request.isVaccinated());
         personEntity = personRepository.save(personEntity);
 
         return transformEntity(personEntity);
@@ -64,8 +63,7 @@ public class PersonService {
         return new Person(
                 personEntity.getId(),
                 personEntity.getFirstName(),
-                personEntity.getLastName(),
-                personEntity.getVaccinated()
+                personEntity.getLastName()
         );
     }
 }
