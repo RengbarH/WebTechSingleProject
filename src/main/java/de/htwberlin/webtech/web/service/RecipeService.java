@@ -2,10 +2,7 @@ package de.htwberlin.webtech.web.service;
 
 import de.htwberlin.webtech.web.api.Recipe;
 import de.htwberlin.webtech.web.api.RecipeManipulationRequest;
-import de.htwberlin.webtech.web.persistance.Complexity;
-import de.htwberlin.webtech.web.persistance.PersonRepository;
-import de.htwberlin.webtech.web.persistance.RecipeEntity;
-import de.htwberlin.webtech.web.persistance.RecipeRepository;
+import de.htwberlin.webtech.web.persistance.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -69,12 +66,15 @@ public class RecipeService {
 
     private Recipe transformEntity(RecipeEntity recipeEntity) {
         var complexity = recipeEntity.getComplexity() != null ? recipeEntity.getComplexity().name() : Complexity.UNKNOWN.name();
+        var ingredientId = recipeEntity.getIngredient().stream().map(IngredientEntity::getId).collect(Collectors.toList());
+
         return new Recipe(
                 recipeEntity.getId(),
                 recipeEntity.getRecipeTitle(),
                 recipeEntity.getSubtitle(),
                 complexity,
-                recipeEntity.getOwner().getId()
+                recipeEntity.getOwner().getId(),
+                ingredientId
         );
     }
 }

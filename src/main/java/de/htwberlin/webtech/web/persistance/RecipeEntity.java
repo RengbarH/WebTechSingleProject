@@ -1,6 +1,8 @@
 package de.htwberlin.webtech.web.persistance;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "recipes")
 public class RecipeEntity {
@@ -22,6 +24,9 @@ public class RecipeEntity {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private PersonEntity owner;
+
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER)
+    private List<IngredientEntity> ingredient = new ArrayList<>();
 
     public RecipeEntity() {
     }
@@ -67,5 +72,13 @@ public class RecipeEntity {
 
     public void setOwner(PersonEntity owner) {
         this.owner = owner;
+    }
+
+    public List<IngredientEntity> getIngredient() {
+        return ingredient;
+    }
+
+    public void setIngredient(List<IngredientEntity> ingredient) {
+        this.ingredient = ingredient;
     }
 }

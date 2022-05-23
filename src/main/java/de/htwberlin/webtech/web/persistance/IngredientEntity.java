@@ -14,7 +14,7 @@ public class IngredientEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "recipe_id", referencedColumnName = "id")
     private RecipeEntity recipe;
 
