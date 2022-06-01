@@ -9,15 +9,15 @@ public class Person {
     private String lastName;
     private String gender;
     private String identifier;
-    private List<Long> recipeId;
+    private List<Long> recipes;
 
-    public Person(long id, String firstName, String lastName, String gender, String identifier, List<Long> recipeId) {
+    public Person(long id, String firstName, String lastName, String gender, String identifier, List<Long> recipes) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.identifier = identifier;
-        this.recipeId = recipeId;
+        this.recipes = recipes;
     }
 
     public long getId() {
@@ -60,11 +60,11 @@ public class Person {
         this.identifier = identifier;
     }
 
-    public List<Long> getRecipeId() {
-        return recipeId;
+    public List<Long> getRecipes() {
+        return recipes;
     }
 
-    public void setRecipeId(List<Long> recipeId) {
-        this.recipeId = recipeId;
+    public void setRecipes(List<Long> recipes) {
+        this.recipes = recipes;
     }
 }
