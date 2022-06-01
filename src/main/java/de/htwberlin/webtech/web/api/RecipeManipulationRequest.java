@@ -14,6 +14,9 @@ public class RecipeManipulationRequest {
         this.ownerId = ownerId;
     }
 
+    public RecipeManipulationRequest() {
+    }
+
     public String getRecipeTitle() {
         return recipeTitle;
     }

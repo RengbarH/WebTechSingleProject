@@ -10,6 +10,9 @@ public class IngredientManipulationRequest {
         this.recipeId = recipeId;
     }
 
+    public IngredientManipulationRequest() {
+    }
+
     public String getName() {
         return name;
     }

@@ -15,6 +15,9 @@ public class PersonManipulationRequest {
         this.identifier = identifier;
     }
 
+    public PersonManipulationRequest() {
+    }
+
     public String getFirstName() {
         return firstName;
     }
